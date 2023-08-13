@@ -1,0 +1,52 @@
+﻿Thoughts//
+facts**
+
+End goal of api's, implementing our functions contained in the end points.
+
+Routing-route http request to hit particular end point to run speciifc functions.
+//happens through a combo of http verbs and uri (aka /shirts, or /shirts/{id})
+
+Before routing happens, there is authesdfntication and authorization. 
+
+//Model binding - Provide info that is contained in the http request into the function as parameters.
+example: in app.MapGet, we pass in a number as a string in the http request as part of the URI. baseURL/shirts/1
+the web api frameworks takes that string, and inputs it into the param that accepts an int. 
+
+//Validation - checks what was provided in the api request before passing the data to the end point as an argument 
+so in the case of our shirts uri, when we add the ID to the uri as a string, the model validation checks the data
+//before changing it to an int and passing it to the function as an arg. 
+
+Authentication & authorization -> routing -> model binding -> model validation -> exception handling -> return data
+
+URI - the end part of the url that refers to and endpoint
+
+end point - get, get, put, post, delete are the end points. Comprised of Http verbs, uri, arrow function, code logic, and return value
+
+http verbs - get get, put post, delete
+
+any web api framework will use a very similar pattern to this so this will be useful to learning GoLang as well. 
+
+//Middleware pipeline describes the architecture of web api with .NET.
+
+Http request comes in, and goes through the pipeline which somewhat resembles a factory assembly line.
+
+Ultimately data is returned as an http response. This response is in answer to the http request. 
+
+
+//Minimal API vs API with controller. 
+Minimal api are for simple scenerios. More complex applications should use controllers.
+
+Controllers are classes that are used to organize the end point methods.
+
+So if we have different methods in our controller class, how do we "map" requests to the correct method in the class?
+
+i.e. if i have a put request and want to update an object, how is that request being mapped to the controller method
+that contains the functionality to update an object? 
+
+Answer: You use the app.UseMapControllers() function in your program class. Next, you use the [Route] attribute along with	
+the end point url inside of the attribute brackets. Specifiy your HTTP verb above each method. 
+
+//decorate with api controller attribute and derive from Controller base to make web api controller
+    //creating methods for each end point within this controller class
+
+Using the Routing lets you point to the correct end point. 
