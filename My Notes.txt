@@ -50,3 +50,13 @@ the end point url inside of the attribute brackets. Specifiy your HTTP verb abov
     //creating methods for each end point within this controller class
 
 Using the Routing lets you point to the correct end point. 
+
+Model Binding - Maps data from http request to params of action method. 
+
+For instance, I need to pass an ID from my http request as a param for updating a shirt. Model binding is what takes
+the string ID provided by the request, into the param of my UpdateShirt method as an int arg. To do this, we need to know
+where the data (in this example id) is within the request. 
+
+Data can be routed from the route to the param of the action method. I.e. add param to http verb and it routes to param
+of action method, aka the method within our controller. You can even use [FromRoute] to specifiy that you want the data
+for the param to come from the route. 

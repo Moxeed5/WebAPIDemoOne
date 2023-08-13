@@ -14,10 +14,10 @@ namespace WebAPIDemoOne.Controllers
         }
 
         [HttpGet("{id}")]
-        
-        public string GetShirtById(int id)
+
+        public string GetShirtById(int id, [FromHeader (Name = "Color")] string color)
         {
-            return $"Reading shirt {id}";
+            return $"Reading shirt {id} color: {color}";
         }
 
         [HttpPost]
