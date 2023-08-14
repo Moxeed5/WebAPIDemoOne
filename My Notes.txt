@@ -82,3 +82,12 @@ able to do whatever we want with the objects. For example if it's a user name, w
 it doesn't contain curse words. Or call another function that checks if it exists in a db. Just a whole we can do :).
 There are attributes that specificies a field is for a credit card num and attributes for a phone number for example. 
 
+As our application grows, we are working with objects rather than just a string saying "Created shirt" "reading shirt" etc.
+//We have a shirt model, that we are working with now. So we are returning shirt objects that have mulitple props.
+//So our controller methods are returning shirt objects so the return type should be Shirt right? Well no...
+//this is because although we are returning a shirt obj, we also need to return a status code for the http request.
+//So we are returning a shirt obj and http status code! For returning multiple types with our web api, the return type
+should be set to IActionResult. 
+
+POSTMAN: If postman is throwing weird errors, rebuild the solution. Ensure raw type is set to Json. Try returning data 
+from body or from form. 

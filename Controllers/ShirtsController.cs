@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using WebAPIDemoOne.Models;
+using WebAPIDemoOne.Models.Repositories;
 
 namespace WebAPIDemoOne.Controllers
 {
@@ -7,39 +9,49 @@ namespace WebAPIDemoOne.Controllers
     [Route("api/[controller]")]
     public class ShirtsController : ControllerBase
     {
+        
+
         [HttpGet]
         
-        public string GetShirts()
+        public IActionResult GetShirts()
         {
-            return "Reading all shirts";
+            return Ok("Reading all shirts");
         }
 
         [HttpGet("{id}")]
 
-        public string GetShirtById(int id)
+        public IActionResult GetShirtById(int id)
         {
-            return $"Reading shirt {id}";
+            if(id <= 0)
+            {
+                return BadRequest();
+            }
+            var shirt = ShirtRepository.GetShirtById(id);
+            if (shirt == null)
+                return NotFound();
+
+            return Ok(shirt);
         }
 
         [HttpPost]
         
-        public string CreateShirt([FromBody] Shirt shirt)
+        public IActionResult CreateShirt([FromBody] Shirt shirt)
         {
-            return "Created shirt";
+            return Ok("Created shirt");
         }
 
         [HttpPut("{id}")]
         
-        public string UpdateShirt(int id)
+        public IActionResult UpdateShirt(int id)
         {
-            return $"Updating shirt: {id}";
+            return Ok($"Updating shirt: {id}");
         }
 
         [HttpDelete("{id}")]
         
-        public string DeleteShirt(int id)
+        public IActionResult DeleteShirt(int id)
         {
-            return $"Deleted shirt: {id}";
+            return Ok($"Deleted shirt: {id}");
         }
     }
 }
