@@ -59,4 +59,26 @@ where the data (in this example id) is within the request.
 
 Data can be routed from the route to the param of the action method. I.e. add param to http verb and it routes to param
 of action method, aka the method within our controller. You can even use [FromRoute] to specifiy that you want the data
-for the param to come from the route. 
+for the param to come from the route. This is for primitive data.
+
+Using the body is for more complex data and typically associated with httppost. 
+
+
+If postman is not working: Make sure that I've launched the server from the IDE. Aka click play.
+//Unsupported media type error: This is likely because the raw body response is NOT set to JSON
+
+
+Model validation with annotations throw an exception if the data being passed to our controllers is not correctly formatted.
+//Ex): Using [Required]. However there are many other annotation types available. ChatGPT this or check microsoft.
+
+
+So far, we created controllers that return strings. Then we introduced model binding so that we could pass data to our
+controllers from the http requets. Http request contained the data that we wanted to pass to the param of our controller method.
+Now we'ved used annotations to validate the data being passed. 
+
+We are just returning a string now, however we are passing in objects in our http request from the body. It is easy to see
+how once we have passed in objects through the http request, we will do a lot more than just return a string. We will be
+able to do whatever we want with the objects. For example if it's a user name, we can iterate through the string and ensure
+it doesn't contain curse words. Or call another function that checks if it exists in a db. Just a whole we can do :).
+There are attributes that specificies a field is for a credit card num and attributes for a phone number for example. 
+

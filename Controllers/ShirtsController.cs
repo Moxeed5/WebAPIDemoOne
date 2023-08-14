@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebAPIDemoOne.Models;
 
 namespace WebAPIDemoOne.Controllers
 {
@@ -15,14 +16,14 @@ namespace WebAPIDemoOne.Controllers
 
         [HttpGet("{id}")]
 
-        public string GetShirtById(int id, [FromHeader (Name = "Color")] string color)
+        public string GetShirtById(int id)
         {
-            return $"Reading shirt {id} color: {color}";
+            return $"Reading shirt {id}";
         }
 
         [HttpPost]
         
-        public string CreateShirt()
+        public string CreateShirt([FromBody] Shirt shirt)
         {
             return "Created shirt";
         }
