@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using WebAPIDemoOne.Filters;
+using WebAPIDemoOne.Filters.ActionFilters;
+using WebAPIDemoOne.Filters.ExceptionFilters;
 using WebAPIDemoOne.Models;
 using WebAPIDemoOne.Models.Repositories;
 
@@ -15,43 +18,51 @@ namespace WebAPIDemoOne.Controllers
         
         public IActionResult GetShirts()
         {
-            return Ok("Reading all shirts");
+            return Ok(ShirtRepository.GetShirts());
         }
 
         [HttpGet("{id}")]
+        [Shirt_ValidateShirtIdFilter]
 
         public IActionResult GetShirtById(int id)
         {
-            if(id <= 0)
-            {
-                return BadRequest();
-            }
-            var shirt = ShirtRepository.GetShirtById(id);
-            if (shirt == null)
-                return NotFound();
 
-            return Ok(shirt);
+            return Ok(ShirtRepository.GetShirtById(id));
         }
 
         [HttpPost]
-        
+        [Shirt_ValidateCreateShirtFilter]
         public IActionResult CreateShirt([FromBody] Shirt shirt)
         {
-            return Ok("Created shirt");
+            ShirtRepository.AddShirt(shirt);
+
+            return CreatedAtAction(nameof(GetShirtById), 
+                new { id = shirt.ShirtId},
+                shirt);
         }
 
         [HttpPut("{id}")]
-        
-        public IActionResult UpdateShirt(int id)
+        [Shirt_ValidateShirtIdFilter]
+        [Shirt_ValidateUpdateShirtFilter]
+        [Shirt_HandleUpdateExceptionsFilter]
+
+        public IActionResult UpdateShirt(int id, Shirt shirt)
         {
-            return Ok($"Updating shirt: {id}");
+
+            ShirtRepository.UpdateShirt(shirt);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
+        [Shirt_ValidateShirtIdFilter]
         
         public IActionResult DeleteShirt(int id)
         {
-            return Ok($"Deleted shirt: {id}");
+            var shirt = ShirtRepository.GetShirtById(id);
+
+            ShirtRepository.DeleteShirt(id);
+
+            return Ok(shirt);
         }
     }
 }

@@ -91,3 +91,6 @@ should be set to IActionResult.
 
 POSTMAN: If postman is throwing weird errors, rebuild the solution. Ensure raw type is set to Json. Try returning data 
 from body or from form. 
+
+ActionFilterAttributes enable us to abstract the validation logic out of the controller method. So we are no longer checking
+if the argument is null in the body of the controller method for example.
