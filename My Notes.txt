@@ -94,3 +94,22 @@ from body or from form.
 
 ActionFilterAttributes enable us to abstract the validation logic out of the controller method. So we are no longer checking
 if the argument is null in the body of the controller method for example.
+
+
+ORM is a way to connect a .NET application to a db. It is a code first approach that uses
+entity framework to create a db from the code that you've written in your .NET application.
+
+//Open SQL server mgmt studio. Ensure that you have a local connection to a db up and running.
+if not, click connect, database engine, use windows auth, and server name (local).
+On my local machine, it is <DESKTOP-RT1IBUL\SQLEXPRESS>.
+
+In VS community, go to server explorer. Add new connection, enter in the <DESKTOP-RT1IBUL\SQLEXPRESS>
+and click master as the db name. Test connection and click ok. It should now appear under data connections.
+
+Right click and select properties. Window on the right will contain the connection string. 
+Paste into json file and add needed boiler plate code. Update master to desired name. 
+
+To run db migration from .NET to create SQL db's. Go to tools, package manager console,
+type Add-Migration Init 
+
+This iwll create migrations folder in vs community. 
