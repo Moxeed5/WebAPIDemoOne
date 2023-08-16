@@ -35,7 +35,8 @@ namespace WebAPIDemoOne.Models.Repositories
 
         public static Shirt? GetShirtByProperites(string? brand, string? gender, string? color, int? size)
         {
-            return shirts.FirstOrDefault(x => !string.IsNullOrWhiteSpace(brand)
+            return 
+            shirts.FirstOrDefault(x => !string.IsNullOrWhiteSpace(brand)
             && !string.IsNullOrWhiteSpace(x.Brand) &&
             x.Brand.Equals(brand, StringComparison.OrdinalIgnoreCase) &&
             !string.IsNullOrWhiteSpace(gender)
